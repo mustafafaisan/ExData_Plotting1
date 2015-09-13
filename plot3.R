@@ -10,13 +10,12 @@ subData = read.csv.sql(file, sql = sqlquery, header = TRUE, sep = ";"
                        ,colClasses = classes)
 subData = na.omit(subData)
 readingDate <- strptime(paste(subSetData$Date, subSetData$Time, sep=" "), "%d/%m/%Y %H:%M:%S") 
-#globalActivePower <- as.numeric(subSetData$Global_active_power)
 png(file.path(".", "plot3.png" ))
-plot(x = as.data.frame(datetime), y = subSetData$Sub_metering_1,
+plot(x = as.data.frame(readingDate), y = subSetData$Sub_metering_1,
      type = "n", xlab = "", ylab = "Energy sub metering")
-lines(x = datetime, y = subData$Sub_metering_1, col = "green")
-lines(x = datetime, y = subData$Sub_metering_2, col = "red")
-lines(x = datetime, y = subData$Sub_metering_3, col = "blue")
+lines(x = readingDate, y = subData$Sub_metering_1, col = "green")
+lines(x = readingDate, y = subData$Sub_metering_2, col = "red")
+lines(x = readingDate, y = subData$Sub_metering_3, col = "blue")
 legend("topright", c("sub_metering_1","sub_metering_2", "sub_metering_3"), lty=c(1,1), col=c("green", "blue","red"))
 
 
